@@ -21,9 +21,9 @@ public class PlayerController : MonoBehaviour {
 		xmax = rightmost.x - padding;
 	}
 	void Fire(){
-		Vector3 offset = new Vector2 (0,1,0)
-		GameObject beam = Instantiate(projectile, transform.position, Quaternion.identity) as GameObject;
-		beam.GetComponent<Rigidbody2D>().velocity = new Vector3(0,projectileSpeed, 0);
+		Vector3 offset = new Vector3 (0,1,0);
+		GameObject beam = Instantiate(projectile, transform.position + offset, Quaternion.identity) as GameObject;
+		beam.GetComponent<Rigidbody2D>().velocity = new Vector3(0,projectileSpeed,0);
 	}
 
 	void Update () {
@@ -47,7 +47,6 @@ public class PlayerController : MonoBehaviour {
 
 		Projectile missile = collider.gameObject.GetComponent<Projectile>();
 		if(missile){
-			Debug.Log ("Player collided with the missile");
 			health -= missile.GetDamage();
 			missile.Hit();
 			if (health <= 0) {
